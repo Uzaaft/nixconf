@@ -7,7 +7,6 @@
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
   };
 
   outputs = {
@@ -17,7 +16,12 @@
   }: {
     # replace 'joes-desktop' with your hostname here.
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      modules = [./configuration.nix];
+      modules = [
+        ./configuration.nix
+        {
+          inherit home-manager nixpkgs;
+        }
+      ];
     };
   };
 }
